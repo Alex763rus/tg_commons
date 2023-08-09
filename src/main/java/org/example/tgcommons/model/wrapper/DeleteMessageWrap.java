@@ -3,7 +3,10 @@ package org.example.tgcommons.model.wrapper;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import lombok.val;
+import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+
+import java.util.List;
 
 @Getter
 @SuperBuilder(setterPrefix = "set", builderMethodName = "init", toBuilder = true)
@@ -18,5 +21,8 @@ public class DeleteMessageWrap {
         val chatId = chatIdString == null ? String.valueOf(chatIdLong) : chatIdString;
         deleteMessage.setChatId(chatId);
         return deleteMessage;
+    }
+    public List<PartialBotApiMethod> createMessageList() {
+        return List.of(createMessage());
     }
 }
