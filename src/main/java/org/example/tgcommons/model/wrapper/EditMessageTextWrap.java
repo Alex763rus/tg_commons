@@ -12,24 +12,18 @@ import static org.example.tgcommons.constant.Constant.Telegramm.PARSE_MODE;
 
 @Getter
 @SuperBuilder(setterPrefix = "set", builderMethodName = "init", toBuilder = true)
-public class EditMessageTextWrap {
+public class EditMessageTextWrap extends MessageWrapBase {
 
     private Integer messageId;
-    private String chatIdString;
-    private Long chatIdLong;
     private String text;
 
+    @Override
     public PartialBotApiMethod createMessage() {
         val editMessageText = new EditMessageText();
         editMessageText.setMessageId(messageId);
-        val chatId = chatIdString == null ? String.valueOf(chatIdLong) : chatIdString;
-        editMessageText.setChatId(chatId);
+        editMessageText.setChatId(getChaIDString());
         editMessageText.setText(text);
         editMessageText.setParseMode(PARSE_MODE);
         return editMessageText;
-    }
-
-    public List<PartialBotApiMethod> createMessageList() {
-        return List.of(createMessage());
     }
 }

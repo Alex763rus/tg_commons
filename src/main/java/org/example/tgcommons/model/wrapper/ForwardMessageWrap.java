@@ -10,25 +10,17 @@ import java.util.List;
 
 @Getter
 @SuperBuilder(setterPrefix = "set", builderMethodName = "init", toBuilder = true)
-public class ForwardMessageWrap {
+public class ForwardMessageWrap extends MessageWrapBase {
 
-    private String chatIdString;
-    private Long chatIdLong;
-    private String chatIdFromString;
     private Long chatIdFromLong;
     private Integer messageId;
 
+    @Override
     public ForwardMessage createMessage() {
         val forwardMessage = new ForwardMessage();
-        val chatId = chatIdString == null ? String.valueOf(chatIdLong) : chatIdString;
-        val chatIdFrom = chatIdFromString == null ? String.valueOf(chatIdFromLong) : chatIdFromString;
-        forwardMessage.setChatId(chatId);
-        forwardMessage.setFromChatId(chatIdFrom);
+        forwardMessage.setChatId(getChatIdString());
+        forwardMessage.setFromChatId(getChaIDString());
         forwardMessage.setMessageId(messageId);
         return forwardMessage;
-    }
-
-    public List<PartialBotApiMethod> createMessageList() {
-        return List.of(createMessage());
     }
 }

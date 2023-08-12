@@ -14,18 +14,16 @@ import static org.example.tgcommons.constant.Constant.Telegramm.PARSE_MODE;
 
 @Getter
 @SuperBuilder(setterPrefix = "set", builderMethodName = "init", toBuilder = true)
-public class SendDocumentWrap {
+public class SendDocumentWrap extends MessageWrapBase {
 
-    private String chatIdString;
-    private Long chatIdLong;
     private InputFile document;
     private String caption;
     private InlineKeyboardMarkup inlineKeyboardMarkup;
 
+    @Override
     public SendDocument createMessage() {
         val sendDocument = new SendDocument();
-        val chatId = chatIdString == null ? String.valueOf(chatIdLong) : chatIdString;
-        sendDocument.setChatId(chatId);
+        sendDocument.setChatId(getChaIDString());
         sendDocument.setReplyMarkup(inlineKeyboardMarkup);
         sendDocument.setParseMode(PARSE_MODE);
         sendDocument.setDocument(document);
@@ -33,7 +31,4 @@ public class SendDocumentWrap {
         return sendDocument;
     }
 
-    public List<PartialBotApiMethod> createMessageList() {
-        return List.of(createMessage());
-    }
 }
