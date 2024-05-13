@@ -40,8 +40,24 @@ public final class Constant {
     }
 
     @NoArgsConstructor(access = PRIVATE)
+    public static final class MessageConstants {
+        public static final String DEFAULT_TEXT_ERROR = "Ошибка! Команда не найдена";
+    }
+
+
+    @NoArgsConstructor(access = PRIVATE)
     public static final class Telegramm {
         public static final String PARSE_MODE = "Markdown";
     }
 
+    @NoArgsConstructor(access = PRIVATE)
+    public static final class Calendar {
+
+        public static final String SELECTED_MONTH = "SelectedMonth";
+        public static final String PREV_MONTH = "PrevMonth";
+        public static final String NEXT_MONTH = "NextMonth";
+        public static final String MAIN_MENU = "MainMenu";
+        public static final String EMPTY_DAY = "EmptyDay";
+
+    }
 }
